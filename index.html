@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BRB Agency | 100x Your Reach</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23FFFF00%22/><rect x=%225%22 y=%225%22 width=%2290%22 height=%2290%22 fill=%22none%22 stroke=%22%23111111%22 stroke-width=%2210%22/><text x=%2250%22 y=%2275%22 font-family=%22Arial, sans-serif%22 font-weight=%22900%22 font-size=%2270%22 text-anchor=%22middle%22 fill=%22%23111111%22>B</text></svg>">
+    <title>BRB Agency | Holiday Sale 🎄</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23FF0000%22/><rect x=%225%22 y=%225%22 width=%2290%22 height=%2290%22 fill=%22none%22 stroke=%22%23111111%22 stroke-width=%2210%22/><text x=%2250%22 y=%2275%22 font-family=%22Arial, sans-serif%22 font-weight=%22900%22 font-size=%2270%22 text-anchor=%22middle%22 fill=%22%23FFFFFF%22>B</text></svg>">
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,7 +19,9 @@
                 cyan: '#23F0C7',
                 black: '#111111',
                 white: '#FFFFFF',
-                purple: '#A388EE'
+                purple: '#A388EE',
+                red: '#FF3333',
+                green: '#00CC66'
               }
             },
             fontFamily: {
@@ -35,6 +37,7 @@
             animation: {
               'marquee': 'marquee 10s linear infinite',
               'float': 'float 3s ease-in-out infinite',
+              'blink': 'blink 1s steps(2, start) infinite',
             },
             keyframes: {
               marquee: {
@@ -44,30 +47,142 @@
               float: {
                 '0%, 100%': { transform: 'translateY(0)' },
                 '50%': { transform: 'translateY(-10px)' },
+              },
+              blink: {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '0.5' },
               }
             }
           }
         }
       }
     </script>
+    <style>
+        /* Christmas Light Rope Container */
+        .light-rope-container {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 80px; /* Depth of the curve */
+            z-index: 40;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        /* The Wire (SVG) */
+        .light-wire {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: #111;
+            stroke-width: 3;
+        }
+
+        /* Individual Light Bulb */
+        .light {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid #111;
+            background: #fff;
+            transform: translate(-50%, 0); /* Center on the wire point */
+            animation: swing 3s ease-in-out infinite alternate;
+            z-index: 2;
+        }
+
+        /* Socket for the light (small black box connecting to wire) */
+        .light::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: #111;
+        }
+
+        /* Light Animations */
+        .light.red { animation-name: flash-red; animation-duration: 2s; animation-iteration-count: infinite; }
+        .light.green { animation-name: flash-green; animation-duration: 2.5s; animation-iteration-count: infinite; }
+        .light.yellow { animation-name: flash-yellow; animation-duration: 1.8s; animation-iteration-count: infinite; }
+        .light.blue { animation-name: flash-blue; animation-duration: 2.2s; animation-iteration-count: infinite; }
+
+        @keyframes flash-red { 0%, 100% { background: #FF3333; box-shadow: 0 0 15px #FF3333; } 50% { background: #551111; box-shadow: none; } }
+        @keyframes flash-green { 0%, 100% { background: #00CC66; box-shadow: 0 0 15px #00CC66; } 50% { background: #004422; box-shadow: none; } }
+        @keyframes flash-yellow { 0%, 100% { background: #FFFF00; box-shadow: 0 0 15px #FFFF00; } 50% { background: #555500; box-shadow: none; } }
+        @keyframes flash-blue { 0%, 100% { background: #23F0C7; box-shadow: 0 0 15px #23F0C7; } 50% { background: #004433; box-shadow: none; } }
+        
+        @keyframes swing {
+            0% { transform: translate(-50%, 0) rotate(-5deg); }
+            100% { transform: translate(-50%, 0) rotate(5deg); }
+        }
+    </style>
 </head>
-<body class="bg-white text-brb-black overflow-x-hidden selection:bg-brb-pink selection:text-white">
+<body class="bg-white text-brb-black overflow-x-hidden selection:bg-brb-red selection:text-white">
+    
+    <!-- ============================================ -->
+    <!-- SONG CODE IS HERE (AUDIO ELEMENT)            -->
+    <!-- ============================================ -->
+    <audio id="christmas-music" loop>
+        <!-- Primary Source: Archive.org (Reliable Jingle Bell Rock) -->
+        <source src="https://ia800300.us.archive.org/17/items/bobby-helms-jingle-bell-rock-original/Bobby%20Helms%20-%20Jingle%20Bell%20Rock%20%28Original%29.mp3" type="audio/mpeg">
+        <!-- Backup Source: Pixabay -->
+        <source src="https://cdn.pixabay.com/audio/2022/10/18/audio_31c2730e64.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <!-- ============================================ -->
+
+    <!-- Music Toggle Button -->
+    <button id="music-toggle" class="fixed bottom-8 left-4 md:left-8 z-[90] w-14 h-14 bg-brb-yellow border-4 border-brb-black shadow-hard flex items-center justify-center hover:-translate-y-1 hover:shadow-hard-lg transition-all active:translate-y-0 active:shadow-hard">
+        <!-- Default Play Icon (Triangle) -->
+        <svg id="music-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+    </button>
+
+    <!-- Snowfall Canvas -->
+    <canvas id="snow-canvas" class="fixed inset-0 pointer-events-none z-[100]"></canvas>
+
+    <!-- Christmas Deal Badge (Wreath Style) -->
+    <div class="fixed bottom-8 right-4 md:right-8 z-[90] animate-bounce">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScJNbyHaZf9DG59UalQzUbstmm0kXreKZwP9aab9AiKmuB1RA/viewform" target="_blank" class="block relative group cursor-pointer hover:rotate-12 transition-transform duration-300">
+            <!-- Wreath Shape (Green jagged circle) -->
+            <div class="w-32 h-32 md:w-40 md:h-40 bg-brb-green border-4 border-brb-black rounded-full flex items-center justify-center shadow-hard-lg relative">
+                 <!-- Red Bow -->
+                 <div class="absolute -top-4 w-12 h-8 bg-brb-red border-2 border-brb-black transform -rotate-12 z-10"></div>
+                 <div class="text-center transform -rotate-6">
+                    <div class="font-display font-black text-4xl text-white text-stroke">20%</div>
+                    <div class="font-sans font-bold text-xl text-brb-black bg-white px-2 border-2 border-brb-black mt-1">OFF</div>
+                 </div>
+            </div>
+        </a>
+    </div>
     
     <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 border-b-4 border-brb-black bg-brb-yellow py-4">
-        <div class="container mx-auto px-4 flex justify-between items-center">
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 border-b-4 border-brb-black bg-brb-red py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center relative z-50">
             <div class="flex items-center gap-2 group cursor-pointer">
-                <div class="w-10 h-10 bg-brb-black text-white flex items-center justify-center font-display font-bold text-xl border-2 border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] group-hover:rotate-12 transition-transform">
-                    B
+                <!-- Logo with Santa Hat -->
+                <div class="relative">
+                    <div class="absolute -top-6 -left-4 text-4xl transform -rotate-12 z-20">🎅</div>
+                    <div class="w-10 h-10 bg-brb-black text-white flex items-center justify-center font-display font-bold text-xl border-2 border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] group-hover:rotate-12 transition-transform">
+                        B
+                    </div>
                 </div>
-                <span class="font-display font-black text-2xl tracking-tighter italic">BRB AGENCY</span>
+                <span class="font-display font-black text-2xl tracking-tighter italic text-white text-shadow-black">BRB AGENCY</span>
             </div>
 
             <!-- Desktop Menu -->
-            <div class="hidden md:flex gap-8 font-sans font-bold text-lg uppercase tracking-wide items-center">
-                <a href="#services" class="hover:underline decoration-4 decoration-brb-pink underline-offset-4 hover:-rotate-2 transition-transform">What We Do</a>
-                <a href="#vibe" class="hover:underline decoration-4 decoration-brb-cyan underline-offset-4 hover:rotate-2 transition-transform">The Vibe</a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScJNbyHaZf9DG59UalQzUbstmm0kXreKZwP9aab9AiKmuB1RA/viewform" target="_blank" class="bg-brb-black text-white px-6 py-2 border-2 border-transparent hover:bg-white hover:text-brb-black hover:border-brb-black shadow-hard transition-all hover:-translate-y-1 active:translate-y-0 active:shadow-none">
+            <div class="hidden md:flex gap-8 font-sans font-bold text-lg uppercase tracking-wide items-center text-white">
+                <a href="#services" class="hover:underline decoration-4 decoration-brb-green underline-offset-4 hover:-rotate-2 transition-transform">Services</a>
+                <a href="#vibe" class="hover:underline decoration-4 decoration-brb-yellow underline-offset-4 hover:rotate-2 transition-transform">The Vibe</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScJNbyHaZf9DG59UalQzUbstmm0kXreKZwP9aab9AiKmuB1RA/viewform" target="_blank" class="bg-white text-brb-black px-6 py-2 border-2 border-transparent hover:bg-brb-green hover:text-white hover:border-brb-black shadow-hard transition-all hover:-translate-y-1 active:translate-y-0 active:shadow-none">
                     Let's Talk
                 </a>
             </div>
@@ -77,64 +192,92 @@
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
+        
+        <!-- Dynamic Hanging Lights Container -->
+        <div class="light-rope-container" id="light-rope">
+            <!-- SVG Wire path will be injected here by JS -->
+            <svg class="light-wire" id="wire-svg">
+                <path id="wire-path" d="" />
+            </svg>
+            <!-- Light bulbs will be injected here by JS -->
+        </div>
     </nav>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 bg-brb-yellow z-[60] hidden flex-col items-center justify-center gap-8">
+    <div id="mobile-menu" class="fixed inset-0 bg-brb-red z-[60] hidden flex-col items-center justify-center gap-8">
         <button id="close-menu-btn" class="absolute top-6 right-6 p-2 border-2 border-brb-black bg-white shadow-hard">
             <i data-lucide="x" class="w-6 h-6"></i>
         </button>
-        <a href="#services" class="mobile-link font-display text-5xl font-black text-stroke hover:text-white transition-colors">SERVICES</a>
-        <a href="#vibe" class="mobile-link font-display text-5xl font-black text-stroke hover:text-white transition-colors">THE VIBE</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScJNbyHaZf9DG59UalQzUbstmm0kXreKZwP9aab9AiKmuB1RA/viewform" target="_blank" class="mobile-link font-display text-5xl font-black text-stroke hover:text-white transition-colors">CONTACT</a>
+        <a href="#services" class="mobile-link font-display text-5xl font-black text-stroke text-white hover:text-brb-green transition-colors">SERVICES</a>
+        <a href="#vibe" class="mobile-link font-display text-5xl font-black text-stroke text-white hover:text-brb-green transition-colors">THE VIBE</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScJNbyHaZf9DG59UalQzUbstmm0kXreKZwP9aab9AiKmuB1RA/viewform" target="_blank" class="mobile-link font-display text-5xl font-black text-stroke text-white hover:text-brb-green transition-colors">CONTACT</a>
     </div>
 
     <!-- Hero Section -->
-    <section class="pt-40 pb-20 md:pt-56 md:pb-32 relative overflow-hidden">
+    <section class="pt-40 pb-20 md:pt-56 md:pb-32 relative overflow-hidden bg-white dot-pattern">
         <!-- Floating Elements -->
-        <div class="absolute top-40 left-10 text-brb-cyan animate-bounce hidden lg:block">
-            <svg width="64" height="64" viewBox="0 0 50 50" fill="currentColor" stroke="black" stroke-width="2">
-                <path d="M25 0 L31 18 L50 18 L35 29 L41 48 L25 37 L9 48 L15 29 L0 18 L19 18 Z" />
+        <div class="absolute top-40 left-10 text-brb-green animate-bounce hidden lg:block transform rotate-12">
+            <!-- Christmas Tree / Abstract Shape -->
+            <svg width="80" height="80" viewBox="0 0 50 50" fill="currentColor" stroke="black" stroke-width="2">
+                <path d="M25 5 L5 45 H45 Z" />
+                <rect x="22" y="45" width="6" height="5" fill="#663300" stroke="black" stroke-width="2"/>
             </svg>
         </div>
-        <div class="absolute bottom-20 right-10 text-brb-pink animate-float hidden lg:block">
-            <svg width="80" height="80" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="3">
-                <path d="M30 30 C 35 30 35 35 30 35 C 25 35 25 25 30 25 C 40 25 40 40 30 40 C 15 40 15 20 30 20 C 50 20 50 50 30 50" stroke-linecap="round" />
+        
+        <!-- Brutalist Snowman -->
+        <div class="absolute bottom-32 right-10 animate-float hidden lg:block">
+            <svg width="100" height="140" viewBox="0 0 100 140">
+                <!-- Bottom Snowball -->
+                <rect x="10" y="70" width="80" height="60" fill="white" stroke="#111" stroke-width="4" />
+                <!-- Middle Snowball -->
+                <rect x="20" y="30" width="60" height="40" fill="white" stroke="#111" stroke-width="4" />
+                <!-- Head -->
+                <rect x="30" y="0" width="40" height="30" fill="white" stroke="#111" stroke-width="4" />
+                <!-- Hat -->
+                <rect x="25" y="-10" width="50" height="10" fill="#111" />
+                <rect x="35" y="-25" width="30" height="15" fill="#111" />
+                <!-- Carrot Nose -->
+                <path d="M50 15 L70 20 L50 25 Z" fill="#FF9900" stroke="#111" stroke-width="2" />
+                <!-- Eyes -->
+                <rect x="40" y="10" width="5" height="5" fill="#111" />
+                <rect x="55" y="10" width="5" height="5" fill="#111" />
             </svg>
         </div>
         
         <div class="container mx-auto px-4 text-center relative z-10">
-            <div class="inline-block bg-brb-cyan border-2 border-brb-black px-4 py-1 font-bold font-sans mb-6 shadow-hard transform -rotate-2 hover:rotate-0 transition-transform cursor-default">
-                🚀 100x YOUR REACH
+            <div class="inline-block bg-brb-green border-2 border-brb-black px-4 py-1 font-bold font-sans mb-6 shadow-hard transform -rotate-2 hover:rotate-0 transition-transform cursor-default text-white">
+                🎄 HOLIDAY SZN SPECIAL
             </div>
             <h1 class="font-display font-black text-6xl md:text-8xl lg:text-9xl leading-[0.9] mb-8 uppercase">
-                We Go <span class="text-brb-pink bg-brb-black px-2 text-white mx-1">Viral</span><br />
-                So You Don't<br />
+                Sleigh The <span class="text-white bg-brb-red px-2 border-2 border-brb-black mx-1 transform rotate-2 inline-block shadow-hard">Algo</span><br />
+                Before The<br />
                 <span class="relative inline-block mt-2">
-                    Have To.
-                    <svg class="absolute -bottom-4 left-0 w-full text-brb-yellow" height="20" viewBox="0 0 100 20" fill="none" stroke="currentColor" stroke-width="4">
+                    Year Ends.
+                    <svg class="absolute -bottom-4 left-0 w-full text-brb-green" height="20" viewBox="0 0 100 20" fill="none" stroke="currentColor" stroke-width="4">
                         <path d="M2 10 L10 2 L18 10 L26 2 L34 10 L42 2 L50 10 L58 2 L66 10 L74 2 L82 10 L90 2 L98 10" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
             </h1>
-            <p class="font-sans text-xl md:text-2xl max-w-2xl mx-auto mb-12 font-medium border-l-8 border-brb-pink pl-6 text-left md:text-center md:border-l-0 md:pl-0 bg-white md:bg-transparent p-4 md:p-0 shadow-hard md:shadow-none border-2 md:border-0 border-brb-black md:border-transparent">
-                Writing. Shooting. Posting. Hacking the Algo. <br class="hidden md:block" />
-                We build the software and the stories that break the internet.
+            <p class="font-sans text-xl md:text-2xl max-w-2xl mx-auto mb-12 font-medium border-l-8 border-brb-green pl-6 text-left md:text-center md:border-l-0 md:pl-0 bg-white md:bg-transparent p-4 md:p-0 shadow-hard md:shadow-none border-2 md:border-0 border-brb-black md:border-transparent">
+                Writing. Shooting. Posting. Wrapping Up 2024.<br class="hidden md:block" />
+                Give your Q1 revenue the gift of virality.
             </p>
             
             <div class="flex flex-col md:flex-row justify-center gap-6">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScJNbyHaZf9DG59UalQzUbstmm0kXreKZwP9aab9AiKmuB1RA/viewform" target="_blank" class="group relative inline-flex items-center justify-center bg-brb-black text-white font-display font-bold text-2xl px-12 py-4 border-4 border-brb-black shadow-hard-lg hover:bg-brb-yellow hover:text-brb-black transition-all hover:-translate-y-2 hover:shadow-hard-xl">
-                    <span>START NOW</span>
-                    <i data-lucide="arrow-right" class="ml-3 w-8 h-8 group-hover:translate-x-2 transition-transform"></i>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScJNbyHaZf9DG59UalQzUbstmm0kXreKZwP9aab9AiKmuB1RA/viewform" target="_blank" class="group relative inline-flex items-center justify-center bg-brb-black text-white font-display font-bold text-2xl px-12 py-4 border-4 border-brb-black shadow-hard-lg hover:bg-brb-red hover:text-white transition-all hover:-translate-y-2 hover:shadow-hard-xl">
+                    <span>GET STARTED</span>
+                    <i data-lucide="snowflake" class="ml-3 w-8 h-8 group-hover:spin transition-transform"></i>
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Marquee -->
-    <div class="bg-brb-pink border-y-4 border-brb-black py-4 overflow-hidden whitespace-nowrap">
-        <div class="inline-block animate-marquee font-display font-bold text-3xl text-white tracking-wider">
-            SHIP FAST • BREAK THINGS • GO VIRAL • WRITE CODE • CREATE CHAOS • HACK GROWTH • SCALE 100X • SHIP FAST • BREAK THINGS • GO VIRAL • WRITE CODE • CREATE CHAOS •
+    <div class="bg-brb-green border-y-4 border-brb-black py-4 overflow-hidden whitespace-nowrap relative">
+        <!-- Candy Cane Stripes CSS -->
+        <div class="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(45deg,#fff,#fff_20px,transparent_20px,transparent_40px)]"></div>
+        <div class="inline-block animate-marquee font-display font-bold text-3xl text-brb-black tracking-wider relative z-10">
+            MERRY CHRISTMAS • HAPPY NEW YEAR • SHIP FAST • BREAK THINGS • 2024 WRAPPED • HO HO HACKING • SCALE 100X • MERRY CHRISTMAS • HAPPY NEW YEAR • SHIP FAST • BREAK THINGS • 2024 WRAPPED • HO HO HACKING •
         </div>
     </div>
 
@@ -143,78 +286,78 @@
         <div class="container mx-auto px-4">
             <div class="flex items-end gap-4 mb-16">
                 <h2 class="font-display font-black text-6xl md:text-7xl uppercase relative inline-block bg-white border-4 border-brb-black px-6 py-2 shadow-hard transform -rotate-1">
-                    Our Stack
+                    Our Gifts 🎁
                 </h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 px-2">
                 <!-- Card 1 -->
-                <div class="relative group border-4 border-brb-black p-6 shadow-hard transition-all duration-200 hover:shadow-hard-lg hover:-translate-y-1 bg-brb-yellow -rotate-1 hover:rotate-0">
+                <div class="relative group border-4 border-brb-black p-6 shadow-hard transition-all duration-300 hover:shadow-hard-lg hover:scale-110 hover:-translate-y-2 bg-brb-yellow -rotate-1 hover:rotate-3 z-0 hover:z-20">
                     <div class="absolute -top-6 -right-6 bg-white border-4 border-brb-black p-3 rounded-full shadow-hard-sm z-10">
                         <i data-lucide="pen-tool" class="w-8 h-8 text-brb-black"></i>
                     </div>
                     <h3 class="font-display font-bold text-3xl mb-4 uppercase tracking-tighter text-brb-black leading-none">Killer Copy</h3>
-                    <p class="font-sans font-medium text-lg leading-tight border-t-4 border-brb-black pt-4">Scripts that hook in 3 seconds. Twitter threads that convert. Newsletters people actually read.</p>
+                    <p class="font-sans font-medium text-lg leading-tight border-t-4 border-brb-black pt-4">Scripts that hook like Santa on a chimney. Twitter threads that convert.</p>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="relative group border-4 border-brb-black p-6 shadow-hard transition-all duration-200 hover:shadow-hard-lg hover:-translate-y-1 bg-brb-cyan rotate-2 hover:rotate-0">
+                <div class="relative group border-4 border-brb-black p-6 shadow-hard transition-all duration-300 hover:shadow-hard-lg hover:scale-110 hover:-translate-y-2 bg-brb-cyan rotate-2 hover:-rotate-3 z-0 hover:z-20">
                     <div class="absolute -top-6 -right-6 bg-white border-4 border-brb-black p-3 rounded-full shadow-hard-sm z-10">
                         <i data-lucide="video" class="w-8 h-8 text-brb-black"></i>
                     </div>
                     <h3 class="font-display font-bold text-3xl mb-4 uppercase tracking-tighter text-brb-black leading-none">Production</h3>
-                    <p class="font-sans font-medium text-lg leading-tight border-t-4 border-brb-black pt-4">4K shoots, rapid editing, and thumbnails that get clicks. We make you look like a main character.</p>
+                    <p class="font-sans font-medium text-lg leading-tight border-t-4 border-brb-black pt-4">4K shoots, rapid editing. We edit faster than elves build toys.</p>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="relative group border-4 border-brb-black p-6 shadow-hard transition-all duration-200 hover:shadow-hard-lg hover:-translate-y-1 bg-brb-pink -rotate-2 hover:rotate-0">
+                <div class="relative group border-4 border-brb-black p-6 shadow-hard transition-all duration-300 hover:shadow-hard-lg hover:scale-110 hover:-translate-y-2 bg-brb-pink -rotate-2 hover:rotate-3 z-0 hover:z-20">
                     <div class="absolute -top-6 -right-6 bg-white border-4 border-brb-black p-3 rounded-full shadow-hard-sm z-10">
                         <i data-lucide="share-2" class="w-8 h-8 text-brb-black"></i>
                     </div>
                     <h3 class="font-display font-bold text-3xl mb-4 uppercase tracking-tighter text-brb-black leading-none">Distribution</h3>
-                    <p class="font-sans font-medium text-lg leading-tight border-t-4 border-brb-black pt-4">We know the algo better than the engineers who built it. Posting schedules, community management, and growth hacks.</p>
+                    <p class="font-sans font-medium text-lg leading-tight border-t-4 border-brb-black pt-4">We check the list twice. Posting schedules, community management, and growth hacks.</p>
                 </div>
 
                 <!-- Card 4 -->
-                <div class="relative group border-4 border-brb-black p-6 shadow-hard transition-all duration-200 hover:shadow-hard-lg hover:-translate-y-1 bg-brb-purple rotate-1 hover:rotate-0">
+                <div class="relative group border-4 border-brb-black p-6 shadow-hard transition-all duration-300 hover:shadow-hard-lg hover:scale-110 hover:-translate-y-2 bg-brb-purple rotate-1 hover:-rotate-3 z-0 hover:z-20">
                     <div class="absolute -top-6 -right-6 bg-white border-4 border-brb-black p-3 rounded-full shadow-hard-sm z-10">
                         <i data-lucide="code" class="w-8 h-8 text-brb-black"></i>
                     </div>
                     <h3 class="font-display font-bold text-3xl mb-4 uppercase tracking-tighter text-brb-black leading-none">Dev & Tech</h3>
-                    <p class="font-sans font-medium text-lg leading-tight border-t-4 border-brb-black pt-4">Need a landing page? A custom tool? An AI wrapper? We ship clean code faster than you can say 'npm install'.</p>
+                    <p class="font-sans font-medium text-lg leading-tight border-t-4 border-brb-black pt-4">Need a landing page? A custom tool? We ship clean code for the new year.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Vibe Section -->
-    <section id="vibe" class="py-20 bg-brb-black text-white border-t-4 border-brb-black">
-        <div class="container mx-auto px-4">
+    <section id="vibe" class="py-20 bg-brb-black text-white border-t-4 border-brb-black relative overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10">
             <div class="flex flex-col md:flex-row gap-12 items-center">
                 <div class="w-full md:w-1/2">
                     <h2 class="font-display font-black text-5xl md:text-7xl mb-6 leading-tight">
-                        BUILT FOR THE <span class="text-brb-yellow underline decoration-wavy decoration-4 underline-offset-8">100x</span> GENERATION
+                        BUILT FOR THE <span class="text-brb-red underline decoration-wavy decoration-4 underline-offset-8">100x</span> GENERATION
                     </h2>
                     <p class="font-sans text-xl mb-8 text-gray-300">
-                        Traditional agencies move slow. They have meetings about meetings. 
-                        We ship. We iterate. We win. Inspired by the relentless energy of the creator economy.
+                        Traditional agencies are on the naughty list. They have meetings about meetings. 
+                        We ship. We iterate. We win.
                     </p>
                     
                     <div class="space-y-4">
                         <div class="flex items-center gap-4 font-bold text-lg">
-                            <div class="bg-brb-cyan text-brb-black p-1 border-2 border-white shadow-[4px_4px_0px_0px_#ffffff]">
+                            <div class="bg-brb-green text-brb-black p-1 border-2 border-white shadow-[4px_4px_0px_0px_#ffffff]">
                                 <i data-lucide="zap" class="w-5 h-5"></i>
                             </div>
                             Zero fluff, all output.
                         </div>
                         <div class="flex items-center gap-4 font-bold text-lg">
-                            <div class="bg-brb-cyan text-brb-black p-1 border-2 border-white shadow-[4px_4px_0px_0px_#ffffff]">
+                            <div class="bg-brb-green text-brb-black p-1 border-2 border-white shadow-[4px_4px_0px_0px_#ffffff]">
                                 <i data-lucide="cpu" class="w-5 h-5"></i>
                             </div>
                             AI-integrated workflows.
                         </div>
                         <div class="flex items-center gap-4 font-bold text-lg">
-                            <div class="bg-brb-cyan text-brb-black p-1 border-2 border-white shadow-[4px_4px_0px_0px_#ffffff]">
+                            <div class="bg-brb-green text-brb-black p-1 border-2 border-white shadow-[4px_4px_0px_0px_#ffffff]">
                                 <i data-lucide="smile" class="w-5 h-5"></i>
                             </div>
                             Meme-literate creative direction.
@@ -224,14 +367,14 @@
                 
                 <!-- Graph Graphic -->
                 <div class="w-full md:w-1/2 relative">
-                    <div class="bg-white p-8 border-4 border-brb-cyan shadow-[12px_12px_0px_0px_#23F0C7] text-brb-black transform rotate-2 hover:-rotate-1 transition-transform duration-300">
+                    <div class="bg-white p-8 border-4 border-brb-green shadow-[12px_12px_0px_0px_#00CC66] text-brb-black transform rotate-2 hover:-rotate-1 transition-transform duration-300">
                         <div class="flex justify-between items-end h-64 gap-4 pb-4 border-b-4 border-brb-black">
-                            <div class="w-full bg-brb-pink border-2 border-brb-black relative hover:bg-brb-yellow transition-colors" style="height: 40%"></div>
-                            <div class="w-full bg-brb-pink border-2 border-brb-black relative hover:bg-brb-yellow transition-colors" style="height: 65%"></div>
-                            <div class="w-full bg-brb-pink border-2 border-brb-black relative hover:bg-brb-yellow transition-colors" style="height: 50%"></div>
-                            <div class="w-full bg-brb-pink border-2 border-brb-black relative hover:bg-brb-yellow transition-colors" style="height: 85%"></div>
-                            <div class="w-full bg-brb-pink border-2 border-brb-black relative hover:bg-brb-yellow transition-colors" style="height: 70%"></div>
-                            <div class="w-full bg-brb-pink border-2 border-brb-black relative hover:bg-brb-yellow transition-colors" style="height: 95%">
+                            <div class="w-full bg-brb-red border-2 border-brb-black relative hover:bg-brb-green transition-colors" style="height: 40%"></div>
+                            <div class="w-full bg-brb-red border-2 border-brb-black relative hover:bg-brb-green transition-colors" style="height: 65%"></div>
+                            <div class="w-full bg-brb-red border-2 border-brb-black relative hover:bg-brb-green transition-colors" style="height: 50%"></div>
+                            <div class="w-full bg-brb-red border-2 border-brb-black relative hover:bg-brb-green transition-colors" style="height: 85%"></div>
+                            <div class="w-full bg-brb-red border-2 border-brb-black relative hover:bg-brb-green transition-colors" style="height: 70%"></div>
+                            <div class="w-full bg-brb-red border-2 border-brb-black relative hover:bg-brb-green transition-colors" style="height: 95%">
                                 <div class="absolute -top-10 left-1/2 -translate-x-1/2 font-bold font-mono text-sm bg-brb-black text-white px-2 py-1 transform -rotate-6">
                                     STONKS
                                 </div>
@@ -247,14 +390,14 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-32 bg-brb-yellow border-t-4 border-brb-black relative overflow-hidden">
+    <section class="py-32 bg-brb-red border-t-4 border-brb-black relative overflow-hidden">
         <div class="absolute inset-0 opacity-20" style="background-image: url('https://www.transparenttextures.com/patterns/diagmonds-light.png');"></div>
         <div class="container mx-auto px-4 text-center relative z-10">
-            <h2 class="font-display font-black text-6xl md:text-8xl mb-8 text-brb-black drop-shadow-lg">
-                READY TO SHIP?
+            <h2 class="font-display font-black text-6xl md:text-8xl mb-8 text-white drop-shadow-lg uppercase">
+                Ready to Unbox?
             </h2>
-            <p class="font-sans text-2xl font-bold mb-12 max-w-2xl mx-auto">
-                Stop overthinking. Start posting. Fill out the form and let's build something insane together.
+            <p class="font-sans text-2xl font-bold mb-12 max-w-2xl mx-auto text-white">
+                Stop overthinking. Start posting. Fill out the form and let's build something insane for 2025.
             </p>
             
             <div class="bg-white border-4 border-brb-black p-8 max-w-md mx-auto shadow-hard-xl rotate-1 hover:rotate-0 transition-transform">
@@ -263,18 +406,18 @@
                         <div class="w-3 h-3 rounded-full bg-red-500 border border-black"></div>
                         <div class="w-3 h-3 rounded-full bg-yellow-500 border border-black"></div>
                         <div class="w-3 h-3 rounded-full bg-green-500 border border-black"></div>
-                        <span class="ml-auto font-mono text-xs text-gray-500">contact_form.exe</span>
+                        <span class="ml-auto font-mono text-xs text-gray-500">wishlist.exe</span>
                     </div>
                     <p class="text-left font-sans text-lg mb-4">
-                        Tell us about your project. We usually reply within 24 hours unless we're viral.
+                        Tell us about your project. We usually reply within 24 hours.
                     </p>
                     <a 
                         href="https://docs.google.com/forms/d/e/1FAIpQLScJNbyHaZf9DG59UalQzUbstmm0kXreKZwP9aab9AiKmuB1RA/viewform" 
                         target="_blank" 
-                        class="flex items-center justify-center gap-2 bg-brb-pink text-brb-black border-4 border-brb-black font-bold text-xl py-4 shadow-hard hover:bg-brb-cyan hover:shadow-hard-reverse hover:translate-y-1 transition-all active:shadow-none active:translate-y-1"
+                        class="flex items-center justify-center gap-2 bg-brb-green text-white border-4 border-brb-black font-bold text-xl py-4 shadow-hard hover:bg-brb-yellow hover:text-brb-black hover:shadow-hard-reverse hover:translate-y-1 transition-all active:shadow-none active:translate-y-1"
                     >
-                        <i data-lucide="send" class="w-6 h-6"></i>
-                        FILL THE FORM
+                        <i data-lucide="gift" class="w-6 h-6"></i>
+                        CLAIM OFFER
                     </a>
                     <div class="text-xs font-mono text-gray-500 mt-2 flex items-center justify-center gap-1">
                         <i data-lucide="mouse-pointer-2" class="w-3 h-3"></i>
@@ -292,14 +435,14 @@
                 BRB.
             </div>
             <div class="flex flex-col md:flex-row items-center gap-6 font-mono text-sm">
-                <span>© <span id="year"></span> BRB Agency. All rights reserved.</span>
+                <span>© <span id="year"></span> BRB Agency. Happy Holidays!</span>
                 <span class="hidden md:inline text-gray-600">|</span>
-                <span>Made with ☕ and 0% React</span>
+                <span>Made with ☕, ⛄ and 0% React</span>
             </div>
             <div class="flex gap-4">
+                <div class="w-8 h-8 bg-brb-red border-2 border-white rounded-full hover:scale-110 transition-transform"></div>
+                <div class="w-8 h-8 bg-brb-green border-2 border-white rounded-full hover:scale-110 transition-transform"></div>
                 <div class="w-8 h-8 bg-brb-yellow border-2 border-white rounded-full hover:scale-110 transition-transform"></div>
-                <div class="w-8 h-8 bg-brb-cyan border-2 border-white rounded-full hover:scale-110 transition-transform"></div>
-                <div class="w-8 h-8 bg-brb-pink border-2 border-white rounded-full hover:scale-110 transition-transform"></div>
             </div>
         </div>
     </footer>
@@ -315,10 +458,10 @@
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                navbar.classList.remove('py-4', 'bg-brb-yellow');
+                navbar.classList.remove('py-4', 'bg-brb-red');
                 navbar.classList.add('py-2', 'bg-white');
             } else {
-                navbar.classList.add('py-4', 'bg-brb-yellow');
+                navbar.classList.add('py-4', 'bg-brb-red');
                 navbar.classList.remove('py-2', 'bg-white');
             }
         });
@@ -340,6 +483,191 @@
         mobileLinks.forEach(link => {
             link.addEventListener('click', toggleMenu);
         });
+
+        // ============================================
+        // --- SONG CODE IS HERE (JS LOGIC) ---
+        // ============================================
+        const audio = document.getElementById('christmas-music');
+        const musicBtn = document.getElementById('music-toggle');
+        const musicIcon = document.getElementById('music-icon');
+        
+        // Locking flag to prevent "The play() request was interrupted" error
+        let isMusicToggling = false;
+
+        async function toggleMusic() {
+            // Prevent spam-clicking causing race conditions
+            if (isMusicToggling) return;
+            isMusicToggling = true;
+
+            try {
+                if (audio.paused) {
+                    await audio.play();
+                    // Change to Pause Icon (Bars)
+                    musicIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
+                    musicBtn.classList.remove('bg-brb-yellow');
+                    musicBtn.classList.add('bg-brb-green');
+                } else {
+                    audio.pause();
+                    // Change to Play Icon (Triangle)
+                    musicIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+                    musicBtn.classList.add('bg-brb-yellow');
+                    musicBtn.classList.remove('bg-brb-green');
+                }
+            } catch (err) {
+                console.error("Audio Playback Error:", err);
+                // Reset UI to paused state if something goes wrong
+                musicIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+                musicBtn.classList.add('bg-brb-yellow');
+                musicBtn.classList.remove('bg-brb-green');
+            } finally {
+                isMusicToggling = false;
+            }
+        }
+
+        musicBtn.addEventListener('click', toggleMusic);
+
+        // Try to play on first interaction (click anywhere) to bypass autoplay block
+        const playOnFirstInteraction = async () => {
+            if (isMusicToggling) return;
+            isMusicToggling = true;
+
+            try {
+                await audio.play();
+                // Set UI to Playing State
+                musicIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
+                musicBtn.classList.remove('bg-brb-yellow');
+                musicBtn.classList.add('bg-brb-green');
+                
+                // Cleanup listeners once success
+                document.body.removeEventListener('click', playOnFirstInteraction);
+                document.body.removeEventListener('keydown', playOnFirstInteraction);
+            } catch (err) {
+                // User hasn't interacted enough yet, or blocked. Do nothing, wait for manual toggle.
+            } finally {
+                isMusicToggling = false;
+            }
+        };
+        
+        document.body.addEventListener('click', playOnFirstInteraction);
+        document.body.addEventListener('keydown', playOnFirstInteraction);
+
+
+        /* --- CHRISTMAS LIGHTS LOGIC --- */
+        const lightContainer = document.getElementById('light-rope');
+        const wirePath = document.getElementById('wire-path');
+        const colors = ['red', 'green', 'yellow', 'blue'];
+        const LIGHT_COUNT = 30; // Number of lights
+
+        function updateLights() {
+            const width = window.innerWidth;
+            const height = 60; // depth of curve
+            
+            // 1. Draw the SVG Wire (Quadratic Bezier)
+            // Start (0,0) -> Control Point (width/2, height*2) -> End (width, 0)
+            const d = `M 0 0 Q ${width / 2} ${height * 2} ${width} 0`;
+            wirePath.setAttribute('d', d);
+
+            // 2. Position Lights along the curve
+            const existingLights = document.querySelectorAll('.light');
+            existingLights.forEach(el => el.remove());
+
+            for (let i = 1; i < LIGHT_COUNT; i++) {
+                const percent = i / LIGHT_COUNT;
+                const x = width * percent;
+                
+                // Calculate Y on the Quadratic Bezier curve
+                const t = percent;
+                const y = 4 * t * (1 - t) * height;
+
+                const light = document.createElement('div');
+                light.classList.add('light', colors[i % colors.length]);
+                light.style.left = `${x}px`;
+                light.style.top = `${y}px`;
+                
+                // Add staggered animation delay so they don't all blink at once
+                light.style.animationDelay = `-${Math.random() * 2}s`;
+                
+                lightContainer.appendChild(light);
+            }
+        }
+
+        window.addEventListener('resize', updateLights);
+        updateLights(); // Init
+
+        /* --- SNOWFALL ANIMATION --- */
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let snowflakes = [];
+
+        function resizeSnow() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Snowflake {
+            constructor() {
+                this.reset(true);
+            }
+
+            reset(initial = false) {
+                this.x = Math.random() * width;
+                this.y = initial ? Math.random() * height : -10;
+                this.size = Math.random() * 4 + 2; // Size 2 to 6
+                this.speed = Math.random() * 1.5 + 0.5;
+                this.color = '#FFFFFF'; 
+                this.angle = Math.random() * Math.PI * 2; // Starting sway angle
+                this.swaySpeed = Math.random() * 0.02 + 0.01; // How fast it sways
+                this.swayRange = Math.random() * 2; // How wide it sways
+            }
+
+            update() {
+                this.y += this.speed;
+                this.angle += this.swaySpeed;
+                this.x += Math.sin(this.angle) * this.swayRange;
+
+                if (this.y > height) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                
+                // Brutalist outline
+                ctx.strokeStyle = '#111';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            }
+        }
+
+        function initSnow() {
+            resizeSnow();
+            snowflakes = [];
+            const particleCount = window.innerWidth < 768 ? 40 : 80;
+            for (let i = 0; i < particleCount; i++) {
+                snowflakes.push(new Snowflake());
+            }
+        }
+
+        function animateSnow() {
+            ctx.clearRect(0, 0, width, height);
+            snowflakes.forEach(flake => {
+                flake.update();
+                flake.draw();
+            });
+            requestAnimationFrame(animateSnow);
+        }
+
+        window.addEventListener('resize', () => {
+            resizeSnow();
+            initSnow(); // Reset snow on resize to prevent gaps
+        });
+        initSnow();
+        animateSnow();
     </script>
 </body>
 </html>
